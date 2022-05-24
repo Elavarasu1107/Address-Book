@@ -16,6 +16,5 @@ namespace AddressBook_Management
         public int zip { get; set; }
         public long phone { get; set; }
         public string email { get; set; }
-
     }
 }

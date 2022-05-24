@@ -10,6 +10,7 @@ namespace AddressBook_Management
             ContactEditor getMethod = new ContactEditor();
             getMethod.addContacts();
             getMethod.displayContacts();
+            getMethod.editContacts();
         }
     }
 }
