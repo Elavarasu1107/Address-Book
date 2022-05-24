@@ -11,6 +11,8 @@ namespace AddressBook_Management
             getMethod.addContacts();
             getMethod.displayContacts();
             getMethod.editContacts();
+            getMethod.removeContacts();
+            getMethod.displayContacts();
         }
     }
 }

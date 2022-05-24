@@ -43,12 +43,13 @@ namespace AddressBook_Management
         }
         public void editContacts()
         {
+            Console.WriteLine();
             Console.WriteLine("Enter a Name to edit the contact:");
             string fName = Console.ReadLine();
             if(fName == Contact.firstName)
             {
-                Console.WriteLine("To Edit the contact Details Press:\n 1 for First Name\n 2 for Last Name\n 3 for address\n" +
-                    "4 for City\n 5 for State \n 6 for Zip Code\n 7 for Phone Number\n 8 for Email");
+                Console.WriteLine("To Edit the contact Details Press:\n 1 for First Name\n 2 for Last Name\n 3 for Address\n" +
+                    " 4 for City\n 5 for State \n 6 for Zip Code\n 7 for Phone Number\n 8 for Email");
                 int userInput = int.Parse(Console.ReadLine());
 
                 switch(userInput)
@@ -113,6 +114,25 @@ namespace AddressBook_Management
             else
             {
                 Console.WriteLine("Invalid..Name not found!");
+            }
+        }
+        public void removeContacts()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Enter the Name to remove the Contact:");
+            string fName = Console.ReadLine();
+            
+            foreach(var details in listOfPeople.ToList())
+            {
+                if(fName == Contact.firstName)
+                {
+                   listOfPeople.Remove(details);
+                   Console.WriteLine("Contact removed from list");
+                }
+            }
+            if (listOfPeople == null)
+            {
+                Console.WriteLine("Contact removed from list");
             }
         }
     }
