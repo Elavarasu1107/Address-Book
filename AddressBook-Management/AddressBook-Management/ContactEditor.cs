@@ -9,9 +9,10 @@ namespace AddressBook_Management
     internal class ContactEditor
     {
         List<ContactDetails> listOfPeople = new List<ContactDetails>();
-        ContactDetails Contact = new ContactDetails();
+        ContactDetails Contact;
         public void addContacts()
         {
+            Contact = new ContactDetails();
             Console.Write("Enter First Name: ");
             Contact.firstName = Console.ReadLine();
             Console.Write("Enter Last Name: ");
@@ -23,22 +24,27 @@ namespace AddressBook_Management
             Console.Write("Enter State: ");
             Contact.state = Console.ReadLine();
             Console.Write("Enter Zip Code: ");
-            Contact.zip = int.Parse(Console.ReadLine());
+            Contact.zip = Console.ReadLine();
             Console.Write("Enter Phone Number: ");
-            Contact.phone = long.Parse(Console.ReadLine());
+            Contact.phone = Console.ReadLine();
             Console.Write("Enter Email: ");
             Contact.email = Console.ReadLine();
 
             listOfPeople.Add(Contact);
+            Console.WriteLine();
         }
         public void displayContacts()
         {
-            Console.WriteLine();
+            //Console.WriteLine();
             foreach (var details in listOfPeople)
             {
                 Console.WriteLine("First Name: " + details.firstName + "\nLast Name: " + details.lastName + "\nAddress: " 
                 + details.address + "\nCity: " + details.city + "\nCity: " + details.city + "\nZip Code: " 
-                + details.zip + "\nPhone Number: " + details.phone + "\nEmail: " + details.email); 
+                + details.zip + "\nPhone Number: " + details.phone + "\nEmail: " + details.email+ "\n"); 
+            }
+            if(listOfPeople.Count == 0)
+            {
+                Console.WriteLine("Address Book is Empty");
             }
         }
         public void editContacts()
@@ -46,60 +52,61 @@ namespace AddressBook_Management
             Console.WriteLine();
             Console.WriteLine("Enter a Name to edit the contact:");
             string fName = Console.ReadLine();
-            if(fName == Contact.firstName)
+            ContactDetails editContact = listOfPeople.FirstOrDefault(x => x.firstName == fName);
+            if (editContact != null)
             {
                 Console.WriteLine("To Edit the contact Details Press:\n 1 for First Name\n 2 for Last Name\n 3 for Address\n" +
                     " 4 for City\n 5 for State \n 6 for Zip Code\n 7 for Phone Number\n 8 for Email");
-                int userInput = int.Parse(Console.ReadLine());
+                int userInput = Convert.ToInt32(Console.ReadLine());
 
-                switch(userInput)
+                switch (userInput)
                 {
                     case 1:
                         {
                             Console.WriteLine("Enter new First Name");
-                            Contact.firstName = Console.ReadLine();
+                            editContact.firstName = Console.ReadLine();
                             break;
                         }
                     case 2:
                         {
                             Console.WriteLine("Enter new Last Name");
-                            Contact.lastName = Console.ReadLine();
+                            editContact.lastName = Console.ReadLine();
                             break;
                         }
                     case 3:
                         {
                             Console.WriteLine("Enter new Address");
-                            Contact.address = Console.ReadLine();
+                            editContact.address = Console.ReadLine();
                             break;
                         }
                     case 4:
                         {
                             Console.WriteLine("Enter new City Name");
-                            Contact.city = Console.ReadLine();
+                            editContact.city = Console.ReadLine();
                             break;
                         }
                     case 5:
                         {
                             Console.WriteLine("Enter new State Name");
-                            Contact.state = Console.ReadLine();
+                            editContact.state = Console.ReadLine();
                             break;
                         }
                     case 6:
                         {
                             Console.WriteLine("Enter new Zip Code");
-                            Contact.zip = int.Parse(Console.ReadLine());
+                            editContact.zip = Console.ReadLine();
                             break;
                         }
                     case 7:
                         {
                             Console.WriteLine("Enter new Phone Number");
-                            Contact.phone = long.Parse(Console.ReadLine());
+                            editContact.phone = Console.ReadLine();
                             break;
                         }
                     case 8:
                         {
                             Console.WriteLine("Enter new Email");
-                            Contact.email = Console.ReadLine();
+                            editContact.email = Console.ReadLine();
                             break;
                         }
                     default:
@@ -108,12 +115,10 @@ namespace AddressBook_Management
                             break;
                         }
                 }
-                Console.WriteLine("First Name: " + Contact.firstName + "\nLast Name: " + Contact.lastName + "\nAddress: " + Contact.address
-                + "\nCity: " + Contact.city + "\nCity: " + Contact.city + "\nZip Code: " + Contact.zip + "\nPhone Number: " + Contact.phone + "\nEmail: " + Contact.email);
             }
             else
             {
-                Console.WriteLine("Invalid..Name not found!");
+                Console.WriteLine("Sorry...Contact not found!");
             }
         }
         public void removeContacts()
@@ -124,15 +129,21 @@ namespace AddressBook_Management
             
             foreach(var details in listOfPeople.ToList())
             {
-                if(fName == Contact.firstName)
+                if(details.firstName == fName)
                 {
                    listOfPeople.Remove(details);
                    Console.WriteLine("Contact removed from list");
                 }
             }
-            if (listOfPeople == null)
+        }
+        public void multipleContacts()
+        {
+            Console.WriteLine("Enter number of contacts you want to add:");
+            int userInput = Convert.ToInt32(Console.ReadLine());
+            while (userInput > 0)
             {
-                Console.WriteLine("Contact removed from list");
+                addContacts();
+                userInput--;
             }
         }
     }
