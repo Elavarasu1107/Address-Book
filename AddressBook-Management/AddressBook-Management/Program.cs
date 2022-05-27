@@ -45,6 +45,11 @@ namespace AddressBook_Management
                         getMethod.displayContacts();
                         break;
                     }
+                case 6:
+                    {
+                        getMethod.multipleBook();
+                        break;
+                    }
                 default:
                     {
                         Console.WriteLine("Enter a Valid Number");

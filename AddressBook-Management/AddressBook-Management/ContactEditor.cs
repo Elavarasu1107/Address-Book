@@ -8,7 +8,7 @@ namespace AddressBook_Management
 {
     internal class ContactEditor
     {
-        List<ContactDetails> listOfPeople = new List<ContactDetails>();
+        List<ContactDetails> listOfPeople;
         ContactDetails Contact;
         public void addContacts()
         {
@@ -140,10 +140,36 @@ namespace AddressBook_Management
         {
             Console.WriteLine("Enter number of contacts you want to add:");
             int userInput = Convert.ToInt32(Console.ReadLine());
+            listOfPeople = new List<ContactDetails>();
             while (userInput > 0)
             {
                 addContacts();
                 userInput--;
+            }
+        }
+        public void multipleBook()
+        {
+            Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
+            Console.WriteLine("Enter the number of book you want to add: ");
+            int userInput = Convert.ToInt32(Console.ReadLine());
+            while(userInput > 0)
+            {
+                Console.WriteLine("Enter Group Name: ");
+                string groupName = Console.ReadLine();
+                multipleContacts();
+                book.Add(groupName, listOfPeople);
+                userInput--;
+            }
+
+            foreach (var bookName in book)
+            {
+                Console.WriteLine("Grouping Name is :" + bookName.Key+"\n");
+                foreach (var list in bookName.Value)
+                {
+                    Console.WriteLine("First Name: " + list.firstName + "\nLast Name: " + list.lastName + "\nAddress: "
+                 + list.address + "\nCity: " + list.city + "\nCity: " + list.city + "\nZip Code: "
+                 + list.zip + "\nPhone Number: " + list.phone + "\nEmail: " + list.email + "\n");
+                } 
             }
         }
     }
