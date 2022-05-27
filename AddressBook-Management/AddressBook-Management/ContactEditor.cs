@@ -8,7 +8,7 @@ namespace AddressBook_Management
 {
     internal class ContactEditor
     {
-        List<ContactDetails> listOfPeople;
+        List<ContactDetails> listOfPeople = new List<ContactDetails>();
         ContactDetails Contact;
         public void addContacts()
         {
