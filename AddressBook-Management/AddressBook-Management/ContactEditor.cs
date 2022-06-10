@@ -8,8 +8,9 @@ namespace AddressBook_Management
 {
     internal class ContactEditor
     {
+        ContactDetails contact;
         List<ContactDetails> listOfPeople = new List<ContactDetails>();
-        ContactDetails contact; 
+        Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
         public void AddContacts()
         {
             contact = new ContactDetails();
@@ -160,7 +161,7 @@ namespace AddressBook_Management
         }
         public void MultipleBook()
         {
-            Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
+            //Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
             Console.WriteLine("Enter the number of book you want to add: ");
             int userInput = Convert.ToInt32(Console.ReadLine());
             while(userInput > 0)
@@ -174,13 +175,54 @@ namespace AddressBook_Management
 
             foreach (var bookName in book)
             {
-                Console.WriteLine("Grouping Name is :" + bookName.Key+"\n");
+                Console.WriteLine("Group Name is :" + bookName.Key+"\n");
                 foreach (var list in bookName.Value)
                 {
                     Console.WriteLine("First Name: " + list.firstName + "\nLast Name: " + list.lastName + "\nAddress: "
-                 + list.address + "\nCity: " + list.city + "\nCity: " + list.city + "\nZip Code: "
+                 + list.address + "\nCity: " + list.city + "\nState: " + list.state + "\nZip Code: "
                  + list.zip + "\nPhone Number: " + list.phone + "\nEmail: " + list.email + "\n");
                 } 
+            }
+        }
+        public void SearchCityOrState()
+        {
+            MultipleBook();
+            Console.WriteLine("Enter 1 to Search contacts by city\n2 to Search contacts by State");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch(choice)
+            {
+                case 1:
+                    {
+                        Console.WriteLine("Enter a City Name to Search: ");
+                        string searchCity = Console.ReadLine();
+                        foreach (var bookName in book)
+                        {
+                            Console.WriteLine("Group Name is :" + bookName.Key + "\n");
+                            foreach (var list in bookName.Value.FindAll(e => (e.city.Equals(searchCity))).ToList())
+                            {
+                                Console.WriteLine("First Name: " + list.firstName + "\nLast Name: " + list.lastName + "\nAddress: "
+                                + list.address + "\nCity: " + list.city + "\nState: " + list.state + "\nZip Code: "
+                                + list.zip + "\nPhone Number: " + list.phone + "\nEmail: " + list.email + "\n");
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        Console.WriteLine("Enter a State Name to Search: ");
+                        string searchState = Console.ReadLine();
+                        foreach (var bookName in book)
+                        {
+                            Console.WriteLine("Group Name is :" + bookName.Key + "\n");
+                            foreach (var list in bookName.Value.FindAll(e => (e.state.Equals(searchState))).ToList())
+                            {
+                                Console.WriteLine("First Name: " + list.firstName + "\nLast Name: " + list.lastName + "\nAddress: "
+                                + list.address + "\nCity: " + list.city + "\nState: " + list.state + "\nZip Code: "
+                                + list.zip + "\nPhone Number: " + list.phone + "\nEmail: " + list.email + "\n");
+                            }
+                        }
+                        break;
+                    }
             }
         }
     }
