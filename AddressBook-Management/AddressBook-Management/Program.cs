@@ -16,38 +16,39 @@ namespace AddressBook_Management
             {
                 case 1:
                     {
-                        getMethod.addContacts();
-                        getMethod.displayContacts();
+                        getMethod.AddContacts();
+                        getMethod.DisplayContacts();
                         break;
                     }
                 case 2:
                     {
-                        getMethod.displayContacts();
+                        getMethod.AddContacts();
+                        getMethod.DisplayContacts();
                         break;
                     }
                 case 3:
                     {
-                        getMethod.addContacts();
-                        getMethod.editContacts();
-                        getMethod.displayContacts();
+                        getMethod.AddContacts();
+                        getMethod.EditContacts();
+                        getMethod.DisplayContacts();
                         break;
                     }
                 case 4:
                     {
-                        getMethod.multipleContacts();
-                        getMethod.removeContacts();
-                        getMethod.displayContacts();
+                        getMethod.MultipleContacts();
+                        getMethod.RemoveContacts();
+                        getMethod.DisplayContacts();
                         break;
                     }
                 case 5:
                     {
-                        getMethod.multipleContacts();
-                        getMethod.displayContacts();
+                        getMethod.MultipleContacts();
+                        getMethod.DisplayContacts();
                         break;
                     }
                 case 6:
                     {
-                        getMethod.multipleBook();
+                        getMethod.MultipleBook();
                         break;
                     }
                 default:

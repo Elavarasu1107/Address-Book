@@ -9,33 +9,44 @@ namespace AddressBook_Management
     internal class ContactEditor
     {
         List<ContactDetails> listOfPeople = new List<ContactDetails>();
-        ContactDetails Contact;
-        public void addContacts()
+        ContactDetails contact; 
+        public void AddContacts()
         {
-            Contact = new ContactDetails();
-            Console.Write("Enter First Name: ");
-            Contact.firstName = Console.ReadLine();
+            contact = new ContactDetails();
+            bool status = true;
+            while (status)
+            {
+                Console.Write("Enter First Name: ");
+                contact.firstName = Console.ReadLine();
+                if (listOfPeople.Any(e => (e.firstName.Equals(contact.firstName))))
+                {
+                    Console.WriteLine("Name already exist in Address Book. Please Enter a New Name");
+                }
+                else
+                {
+                    status = false;
+                }
+            }
             Console.Write("Enter Last Name: ");
-            Contact.lastName = Console.ReadLine();
+            contact.lastName = Console.ReadLine();
             Console.Write("Enter Address: ");
-            Contact.address = Console.ReadLine();
+            contact.address = Console.ReadLine();
             Console.Write("Enter City: ");
-            Contact.city = Console.ReadLine();
+            contact.city = Console.ReadLine();
             Console.Write("Enter State: ");
-            Contact.state = Console.ReadLine();
+            contact.state = Console.ReadLine();
             Console.Write("Enter Zip Code: ");
-            Contact.zip = Console.ReadLine();
+            contact.zip = Console.ReadLine();
             Console.Write("Enter Phone Number: ");
-            Contact.phone = Console.ReadLine();
+            contact.phone = Console.ReadLine();
             Console.Write("Enter Email: ");
-            Contact.email = Console.ReadLine();
+            contact.email = Console.ReadLine();
 
-            listOfPeople.Add(Contact);
+            listOfPeople.Add(contact);
             Console.WriteLine();
         }
-        public void displayContacts()
+        public void DisplayContacts()
         {
-            //Console.WriteLine();
             foreach (var details in listOfPeople)
             {
                 Console.WriteLine("First Name: " + details.firstName + "\nLast Name: " + details.lastName + "\nAddress: " 
@@ -47,7 +58,7 @@ namespace AddressBook_Management
                 Console.WriteLine("Address Book is Empty");
             }
         }
-        public void editContacts()
+        public void EditContacts()
         {
             Console.WriteLine();
             Console.WriteLine("Enter a Name to edit the contact:");
@@ -121,7 +132,7 @@ namespace AddressBook_Management
                 Console.WriteLine("Sorry...Contact not found!");
             }
         }
-        public void removeContacts()
+        public void RemoveContacts()
         {
             Console.WriteLine();
             Console.WriteLine("Enter the Name to remove the Contact:");
@@ -136,18 +147,18 @@ namespace AddressBook_Management
                 }
             }
         }
-        public void multipleContacts()
+        public void MultipleContacts()
         {
             Console.WriteLine("Enter number of contacts you want to add:");
             int userInput = Convert.ToInt32(Console.ReadLine());
             listOfPeople = new List<ContactDetails>();
-            while (userInput > 0)
+            while(userInput > 0)
             {
-                addContacts();
+                AddContacts();
                 userInput--;
             }
         }
-        public void multipleBook()
+        public void MultipleBook()
         {
             Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
             Console.WriteLine("Enter the number of book you want to add: ");
@@ -156,7 +167,7 @@ namespace AddressBook_Management
             {
                 Console.WriteLine("Enter Group Name: ");
                 string groupName = Console.ReadLine();
-                multipleContacts();
+                MultipleContacts();
                 book.Add(groupName, listOfPeople);
                 userInput--;
             }
