@@ -161,7 +161,6 @@ namespace AddressBook_Management
         }
         public void MultipleBook()
         {
-            //Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
             Console.WriteLine("Enter the number of book you want to add: ");
             int userInput = Convert.ToInt32(Console.ReadLine());
             while(userInput > 0)
@@ -197,7 +196,7 @@ namespace AddressBook_Management
                         string searchCity = Console.ReadLine();
                         foreach (var bookName in book)
                         {
-                            Console.WriteLine("Group Name is :" + bookName.Key + "\n");
+                            Console.WriteLine("Group Name is: " + bookName.Key + "\n");
                             foreach (var list in bookName.Value.FindAll(e => (e.city.Equals(searchCity))).ToList())
                             {
                                 Console.WriteLine("First Name: " + list.firstName + "\nLast Name: " + list.lastName + "\nAddress: "
@@ -213,7 +212,7 @@ namespace AddressBook_Management
                         string searchState = Console.ReadLine();
                         foreach (var bookName in book)
                         {
-                            Console.WriteLine("Group Name is :" + bookName.Key + "\n");
+                            Console.WriteLine("Group Name is: " + bookName.Key + "\n");
                             foreach (var list in bookName.Value.FindAll(e => (e.state.Equals(searchState))).ToList())
                             {
                                 Console.WriteLine("First Name: " + list.firstName + "\nLast Name: " + list.lastName + "\nAddress: "
@@ -223,6 +222,58 @@ namespace AddressBook_Management
                         }
                         break;
                     }
+            }
+        }
+        public void DictionaryforCityAndState()
+        {
+            List<ContactDetails> cityList = new List<ContactDetails>();
+            List<ContactDetails> stateList = new List<ContactDetails>();
+            Dictionary<string, List<ContactDetails>> dictionaryOfCity = new Dictionary<string, List<ContactDetails>>();
+            Dictionary<string, List<ContactDetails>> dictionaryOfState = new Dictionary<string, List<ContactDetails>>();
+            MultipleBook();
+            Console.WriteLine("Enter a City Name to create key in dictionary: ");
+            string searchCity = Console.ReadLine();
+            foreach (var bookName in book)
+            {
+                foreach (var list in bookName.Value.FindAll(e => (e.city.Equals(searchCity))))
+                {
+                    if(list.city.Equals(searchCity))
+                    {
+                        cityList.Add(list);
+                    }   
+                }
+            }
+            dictionaryOfCity.Add(searchCity, cityList);
+
+            Console.WriteLine("Enter a State Name to create key in dictionary: ");
+            string searchState = Console.ReadLine();
+            foreach (var bookName in book)
+            {
+                foreach (var list in bookName.Value.FindAll(e => (e.state.Equals(searchState))))
+                {
+                    if (list.state.Equals(searchState))
+                    {
+                        stateList.Add(list);
+                    }
+                }
+            }
+            dictionaryOfState.Add(searchState, stateList);
+            //Display
+            Console.WriteLine("\nContacts in " + searchCity);
+            foreach (var city in dictionaryOfCity)
+            {
+                foreach(var data in city.Value)
+                {
+                    Console.WriteLine("First Name: " + data.firstName + "\nCity: " + data.city);
+                }
+            }
+            Console.WriteLine("\nContacts in " + searchState);
+            foreach (var state in dictionaryOfState)
+            {
+                foreach (var data in state.Value)
+                {
+                    Console.WriteLine("First Name: " + data.firstName + "\nState: " + data.state);
+                }
             }
         }
     }
