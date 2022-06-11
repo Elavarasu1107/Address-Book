@@ -226,6 +226,8 @@ namespace AddressBook_Management
         }
         public void DictionaryforCityAndState()
         {
+            List<ContactDetails> cityList = new List<ContactDetails>();
+            List<ContactDetails> stateList = new List<ContactDetails>();
             Dictionary<string, List<ContactDetails>> dictionaryOfCity = new Dictionary<string, List<ContactDetails>>();
             Dictionary<string, List<ContactDetails>> dictionaryOfState = new Dictionary<string, List<ContactDetails>>();
             MultipleBook();
@@ -240,7 +242,9 @@ namespace AddressBook_Management
                     }
                     else
                     {
-                        dictionaryOfCity.Add(data.city, new List<ContactDetails>() { data });
+                        cityList = new List<ContactDetails>();
+                        cityList.Add(data);
+                        dictionaryOfCity.Add(data.city, cityList);
                     }
                     if (dictionaryOfState.ContainsKey(data.state))
                     {
@@ -248,7 +252,9 @@ namespace AddressBook_Management
                     }
                     else
                     {
-                        dictionaryOfState.Add(data.state, new List<ContactDetails>() { data });
+                        stateList = new List<ContactDetails>();
+                        stateList.Add(data);
+                        dictionaryOfState.Add(data.state, stateList);
                     }
                 }
             }
@@ -265,7 +271,16 @@ namespace AddressBook_Management
                 Console.WriteLine("Contacts in " + key + "\n");
                 dictionaryOfState[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nCity: " + e.state + "\n"));
             }
-            Console.WriteLine();
+            //Number of contact in City and State
+            Console.WriteLine("Enter City Name to list Number of Contacts");
+            string searchCity = Console.ReadLine();
+            int cityCount = cityList.Count(e => (e.city.StartsWith(searchCity)));
+            Console.WriteLine("Number of Contacts in " + searchCity + ": " + cityCount);
+            Console.WriteLine("Enter State Name to list Number of Contacts");
+            string searchState = Console.ReadLine();
+            int stateCount = stateList.Count(e => (e.state.StartsWith(searchState)));
+            Console.WriteLine("Number of Contacts in " + searchState + ": " + stateCount);
+
         }
     }
 }
