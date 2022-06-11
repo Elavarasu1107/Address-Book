@@ -226,54 +226,43 @@ namespace AddressBook_Management
         }
         public void DictionaryforCityAndState()
         {
-            List<ContactDetails> cityList = new List<ContactDetails>();
-            List<ContactDetails> stateList = new List<ContactDetails>();
             Dictionary<string, List<ContactDetails>> dictionaryOfCity = new Dictionary<string, List<ContactDetails>>();
             Dictionary<string, List<ContactDetails>> dictionaryOfState = new Dictionary<string, List<ContactDetails>>();
             MultipleBook();
-            Console.WriteLine("Enter a City Name to create key in dictionary: ");
-            string searchCity = Console.ReadLine();
-            foreach (var bookName in book)
-            {
-                foreach (var list in bookName.Value.FindAll(e => (e.city.Equals(searchCity))))
-                {
-                    if(list.city.Equals(searchCity))
-                    {
-                        cityList.Add(list);
-                    }   
-                }
-            }
-            dictionaryOfCity.Add(searchCity, cityList);
 
-            Console.WriteLine("Enter a State Name to create key in dictionary: ");
-            string searchState = Console.ReadLine();
             foreach (var bookName in book)
             {
-                foreach (var list in bookName.Value.FindAll(e => (e.state.Equals(searchState))))
+                foreach (var data in bookName.Value)
                 {
-                    if (list.state.Equals(searchState))
+                    if (dictionaryOfCity.ContainsKey(data.city))
                     {
-                        stateList.Add(list);
+                        dictionaryOfCity[data.city].Add(data);
+                    }
+                    else
+                    {
+                        dictionaryOfCity.Add(data.city, new List<ContactDetails>() { data });
+                    }
+                    if (dictionaryOfState.ContainsKey(data.state))
+                    {
+                        dictionaryOfState[data.state].Add(data);
+                    }
+                    else
+                    {
+                        dictionaryOfState.Add(data.state, new List<ContactDetails>() { data });
                     }
                 }
             }
-            dictionaryOfState.Add(searchState, stateList);
-            //Display
-            Console.WriteLine("\nContacts in " + searchCity);
-            foreach (var city in dictionaryOfCity)
+            Console.WriteLine("Displaying Contacts in Cities");
+            foreach (var key in dictionaryOfCity.Keys)
             {
-                foreach(var data in city.Value)
-                {
-                    Console.WriteLine("First Name: " + data.firstName + "\nCity: " + data.city);
-                }
+                Console.WriteLine("Contacts in " + key + "\n");
+                dictionaryOfCity[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nCity: " + e.city + "\n"));
             }
-            Console.WriteLine("\nContacts in " + searchState);
-            foreach (var state in dictionaryOfState)
+            Console.WriteLine("Displaying Contacts in States");
+            foreach (var key in dictionaryOfState.Keys)
             {
-                foreach (var data in state.Value)
-                {
-                    Console.WriteLine("First Name: " + data.firstName + "\nState: " + data.state);
-                }
+                Console.WriteLine("Contacts in " + key + "\n");
+                dictionaryOfState[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nCity: " + e.state + "\n"));
             }
         }
     }
