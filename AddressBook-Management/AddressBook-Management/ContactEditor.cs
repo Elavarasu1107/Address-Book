@@ -230,6 +230,7 @@ namespace AddressBook_Management
             List<ContactDetails> stateList = new List<ContactDetails>();
             Dictionary<string, List<ContactDetails>> dictionaryOfCity = new Dictionary<string, List<ContactDetails>>();
             Dictionary<string, List<ContactDetails>> dictionaryOfState = new Dictionary<string, List<ContactDetails>>();
+            int cityCount = 0, stateCount = 0;
             MultipleBook();
             Console.WriteLine("Enter a City Name to create key in dictionary: ");
             string searchCity = Console.ReadLine();
@@ -240,6 +241,7 @@ namespace AddressBook_Management
                     if(list.city.Equals(searchCity))
                     {
                         cityList.Add(list);
+                        cityCount++;
                     }   
                 }
             }
@@ -254,6 +256,7 @@ namespace AddressBook_Management
                     if (list.state.Equals(searchState))
                     {
                         stateList.Add(list);
+                        stateCount++;
                     }
                 }
             }
@@ -267,6 +270,7 @@ namespace AddressBook_Management
                     Console.WriteLine("First Name: " + data.firstName + "\nCity: " + data.city);
                 }
             }
+            Console.WriteLine("Number of Contacts in " + searchCity +": " + cityCount);
             Console.WriteLine("\nContacts in " + searchState);
             foreach (var state in dictionaryOfState)
             {
@@ -275,6 +279,7 @@ namespace AddressBook_Management
                     Console.WriteLine("First Name: " + data.firstName + "\nState: " + data.state);
                 }
             }
+            Console.WriteLine("Number of Contacts in " + searchState + ": " + stateCount);
         }
     }
 }
