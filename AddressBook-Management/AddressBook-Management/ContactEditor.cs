@@ -252,24 +252,20 @@ namespace AddressBook_Management
                     }
                 }
             }
-<<<<<<< HEAD
-=======
             Console.WriteLine("Displaying Contacts in Cities");
->>>>>>> UC9-CityAndStateDictionary
+
             foreach (var key in dictionaryOfCity.Keys)
             {
                 Console.WriteLine("Contacts in " + key + "\n");
                 dictionaryOfCity[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nCity: " + e.city + "\n"));
-<<<<<<< HEAD
-=======
             }
             Console.WriteLine("Displaying Contacts in States");
             foreach (var key in dictionaryOfState.Keys)
             {
                 Console.WriteLine("Contacts in " + key + "\n");
                 dictionaryOfState[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nCity: " + e.state + "\n"));
->>>>>>> UC9-CityAndStateDictionary
             }
+            Console.WriteLine();
         }
     }
 }
