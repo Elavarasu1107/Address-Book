@@ -11,6 +11,11 @@ namespace AddressBook_Management
         ContactDetails contact;
         List<ContactDetails> listOfPeople = new List<ContactDetails>();
         Dictionary<string, List<ContactDetails>> book = new Dictionary<string, List<ContactDetails>>();
+
+        List<ContactDetails> cityList = new List<ContactDetails>();
+        List<ContactDetails> stateList = new List<ContactDetails>();
+        Dictionary<string, List<ContactDetails>> dictionaryOfCity = new Dictionary<string, List<ContactDetails>>();
+        Dictionary<string, List<ContactDetails>> dictionaryOfState = new Dictionary<string, List<ContactDetails>>();
         public void AddContacts()
         {
             contact = new ContactDetails();
@@ -226,10 +231,7 @@ namespace AddressBook_Management
         }
         public void DictionaryforCityAndState()
         {
-            List<ContactDetails> cityList = new List<ContactDetails>();
-            List<ContactDetails> stateList = new List<ContactDetails>();
-            Dictionary<string, List<ContactDetails>> dictionaryOfCity = new Dictionary<string, List<ContactDetails>>();
-            Dictionary<string, List<ContactDetails>> dictionaryOfState = new Dictionary<string, List<ContactDetails>>();
+            
             MultipleBook();
 
             foreach (var bookName in book)
@@ -259,7 +261,6 @@ namespace AddressBook_Management
                 }
             }
             Console.WriteLine("Displaying Contacts in Cities");
-
             foreach (var key in dictionaryOfCity.Keys)
             {
                 Console.WriteLine("Contacts in " + key + "\n");
@@ -269,18 +270,33 @@ namespace AddressBook_Management
             foreach (var key in dictionaryOfState.Keys)
             {
                 Console.WriteLine("Contacts in " + key + "\n");
-                dictionaryOfState[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nCity: " + e.state + "\n"));
-            }
-            //Number of contact in City and State
+                dictionaryOfState[key].ForEach(e => Console.WriteLine("First Name: " + e.firstName + "\nState: " + e.state + "\n"));
+            } 
+        }
+        public void NumberOfContactsInCityOrState()
+        {
+            DictionaryforCityAndState();
+            int cityCount = 0, stateCount = 0;
             Console.WriteLine("Enter City Name to list Number of Contacts");
             string searchCity = Console.ReadLine();
-            int cityCount = cityList.Count(e => (e.city.StartsWith(searchCity)));
+            foreach (var key in dictionaryOfCity.Keys)
+            {
+                foreach (var value in dictionaryOfCity[key].FindAll(e => (e.city.StartsWith(searchCity))))
+                {
+                    cityCount++;
+                }
+            }
             Console.WriteLine("Number of Contacts in " + searchCity + ": " + cityCount);
             Console.WriteLine("Enter State Name to list Number of Contacts");
             string searchState = Console.ReadLine();
-            int stateCount = stateList.Count(e => (e.state.StartsWith(searchState)));
+            foreach (var key in dictionaryOfState.Keys)
+            {
+                foreach (var value in dictionaryOfState[key].FindAll(e => (e.state.StartsWith(searchState))))
+                {
+                    stateCount++;
+                }
+            }
             Console.WriteLine("Number of Contacts in " + searchState + ": " + stateCount);
-
         }
     }
 }
