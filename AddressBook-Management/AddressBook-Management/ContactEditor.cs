@@ -324,5 +324,29 @@ namespace AddressBook_Management
                 Console.WriteLine();
             }
         }
+        public void WriteCSVFile()
+        {
+            string path = @"D:\BridgeLabz\Address-Book\AddressBook-Management\AddressBook-Management\ContactsCSV.csv";
+            StringBuilder creater = new StringBuilder();
+            Console.WriteLine("First Name, LastName, Address, City, State, Zip Code, Phone Number, Email--Use Comma Separator");
+            creater.AppendLine(Console.ReadLine());
+            File.AppendAllText(path, creater.ToString());
+        }
+        public void ReadCSVFile()
+        {
+            string path = @"D:\BridgeLabz\Address-Book\AddressBook-Management\AddressBook-Management\ContactsCSV.csv";
+            string[] file = File.ReadAllLines(path);
+
+            string[] array = { "First Name", "LastName", "Address", "City", "State", "Zip Code", "Phone Number", "Email" };
+            foreach (string line in file)
+            {
+                string[] data = line.Split(",");
+                for (int i = 0; i < data.Length; i++)
+                {
+                    Console.WriteLine(array[i] + ": " + data[i]);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
