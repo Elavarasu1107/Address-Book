@@ -1,0 +1,24 @@
+{
+  "Family": [
+    {
+      "firstName": "Elavarasu",
+      "lastName": "Appusamy",
+      "address": "11A",
+      "city": "Salem",
+      "state": "Tamil Nadu",
+      "zip": "123456",
+      "phone": "9087654321",
+      "email": "abcxyz@gmail.com"
+    },
+    {
+      "firstName": "Sudha",
+      "lastName": "Shanmugam",
+      "address": "12B",
+      "city": "Namakkal",
+      "state": "Tamil Nadu",
+      "zip": "123456",
+      "phone": "9087654321",
+      "email": "xyzabc@gmail.com"
+    }
+  ]
+}

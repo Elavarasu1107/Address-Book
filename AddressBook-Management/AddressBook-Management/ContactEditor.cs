@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -346,6 +347,32 @@ namespace AddressBook_Management
                     Console.WriteLine(array[i] + ": " + data[i]);
                 }
                 Console.WriteLine();
+            }
+        }
+        public void JSONSerialization()
+        {
+            string path = @"D:\BridgeLabz\Address-Book\AddressBook-Management\AddressBook-Management\ContactsJSON.json";
+            MultipleBook();
+            var json = JsonConvert.SerializeObject(book);
+            File.WriteAllText(path, json);
+        }
+        public void JSONDeserialization()
+        {
+            string path = @"D:\BridgeLabz\Address-Book\AddressBook-Management\AddressBook-Management\ContactsJSON.json";
+            using StreamReader reader = new StreamReader(path);
+            {
+                string json = reader.ReadToEnd();
+                var jsonfile = JsonConvert.DeserializeObject<Dictionary<string, List<ContactDetails>>>(json);
+
+                foreach (var details in jsonfile)
+                {
+                    foreach (var data in details.Value)
+                    {
+                        Console.WriteLine("First Name: " + data.firstName + "\nLast Name: " + data.lastName + "\nAddress: "
+                        + data.address + "\nCity: " + data.city + "\nState: " + data.state + "\nZip Code: "
+                        + data.zip + "\nPhone Number: " + data.phone + "\nEmail: " + data.email + "\n");
+                    }
+                }
             }
         }
     }
